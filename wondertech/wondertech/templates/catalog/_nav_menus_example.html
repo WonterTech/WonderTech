@@ -1,0 +1,28 @@
+{# EXEMPLE : à intégrer dans base.html à la place des menus codés en dur #}
+
+{# Menu Services #}
+<ul class="dropdown">
+  {% for s in nav_services %}
+    <li><a href="{% url 'service_detail' s.slug %}">{{ s.title }}</a></li>
+  {% endfor %}
+</ul>
+
+{# Menu Produits (catégories + sous-catégories) #}
+<ul class="dropdown">
+  {% for c in nav_categories %}
+    <li>
+      <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+      {% if c.children.all %}
+      <ul class="submenu">
+        {% for sub in c.children.all %}<li><a href="{{ sub.get_absolute_url }}">{{ sub.name }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+{# Barre de recherche #}
+<form action="{% url 'search' %}" method="get" role="search">
+  <input type="search" name="q" placeholder="Rechercher un produit…" value="{{ request.GET.q }}">
+  <button type="submit">Rechercher</button>
+</form>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container product-detail">
+  <nav class="breadcrumb">
+    <a href="{% url 'product_list' %}">Produits</a> ›
+    <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a> › {{ product.name }}
+  </nav>
+  <div class="product-detail__layout">
+    <div class="product-detail__gallery">
+      {% for img in product.images.all %}
+        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">
+      {% empty %}
+        <div class="product-card__placeholder">Image à venir</div>
+      {% endfor %}
+    </div>
+    <div class="product-detail__info">
+      <h1>{{ product.name }}</h1>
+      {% if product.brand %}<p class="muted">{{ product.brand }}</p>{% endif %}
+      {% if product.description %}<div>{{ product.description|linebreaks }}</div>{% endif %}
+      {% if product.spec_lines %}
+        <h2>Caractéristiques</h2>
+        <ul>{% for line in product.spec_lines %}<li>{{ line }}</li>{% endfor %}</ul>
+      {% endif %}
+      <a class="btn" href="/#contact">Demander un devis gratuit</a>
+    </div>
+  </div>
+  {% if related %}
+  <h2>Produits similaires</h2>
+  <div class="product-grid">
+    {% for product in related %}{% include "catalog/_product_card.html" %}{% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

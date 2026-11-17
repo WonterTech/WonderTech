@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container">
+  <h1>Recherche{% if q %} : « {{ q }} »{% endif %}</h1>
+  <div class="product-grid">
+    {% for product in page %}{% include "catalog/_product_card.html" %}
+    {% empty %}<p>{% if q %}Aucun résultat.{% else %}Saisissez un terme de recherche.{% endif %}</p>{% endfor %}
+  </div>
+  {% include "catalog/_pagination.html" %}
+</section>
+{% endblock %}

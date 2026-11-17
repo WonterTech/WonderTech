@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+{% if page.hero_image %}{% image page.hero_image fill-1920x900 as hero_bg %}{% endif %}
+<div class="hero{% if hero_bg %} has-img{% endif %}"{% if hero_bg %} style="--hero-img:url('{{ hero_bg.url }}')"{% endif %}>
+  <div class="wrap">
+    <h1 class="rise">{{ page.hero_title }}</h1>
+    {% if page.hero_subtitle %}<p class="rise d1">{{ page.hero_subtitle }}</p>{% endif %}
+    {% if page.hero_button_text and page.hero_button_link %}
+      <a class="btn arrow rise d2" href="{% pageurl page.hero_button_link %}">{{ page.hero_button_text }}</a>
+    {% endif %}
+  </div>
+</div>
+
+{% if page.services.all %}
+<section class="alt-bg">
+  <div class="wrap">
+    <h2 class="reveal">{{ page.services_title }}</h2>
+    {% if page.services_intro %}<p class="lead reveal">{{ page.services_intro }}</p>{% endif %}
+    <div class="cards">
+      {% for item in page.services.all %}
+        {% if item.link_page %}<a class="card reveal" href="{% pageurl item.link_page %}">{% else %}<div class="card reveal">{% endif %}
+          {% if item.image %}{% image item.image fill-600x340 class="card-img" %}{% else %}<span class="card-num">{{ forloop.counter|stringformat:"02d" }}</span>{% endif %}
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        {% if item.link_page %}</a>{% else %}</div>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if page.features.all %}
+<section>
+  <div class="wrap">
+    <h2 class="reveal">{{ page.features_title }}</h2>
+    <div class="features">
+      {% for f in page.features.all %}
+        <div class="feature reveal"><span class="tick">✓</span><div><h3>{{ f.title }}</h3><p>{{ f.description }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if page.cta_button_link %}
+<section class="cta">
+  <div class="wrap reveal">
+    <h2>{{ page.cta_title }}</h2>
+    <p>{{ page.cta_text }}</p>
+    <a class="btn arrow" href="{% pageurl page.cta_button_link %}">{{ page.cta_button_text }}</a>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

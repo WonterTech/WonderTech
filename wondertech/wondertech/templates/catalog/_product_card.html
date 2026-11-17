@@ -1,0 +1,10 @@
+<a class="product-card" href="{{ product.get_absolute_url }}">
+  {% if product.main_image %}
+    <img src="{{ product.main_image.image.url }}" alt="{{ product.main_image.alt_text|default:product.name }}" loading="lazy">
+  {% else %}
+    <div class="product-card__placeholder">Image à venir</div>
+  {% endif %}
+  <h3>{{ product.name }}</h3>
+  {% if product.brand %}<p class="muted">{{ product.brand }}</p>{% endif %}
+  {% if product.short_description %}<p>{{ product.short_description }}</p>{% endif %}
+</a>

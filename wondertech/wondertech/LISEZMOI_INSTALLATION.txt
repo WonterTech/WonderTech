@@ -1,0 +1,35 @@
+INSTALLATION DU CATALOGUE WONDERTECH
+=====================================
+Copiez dans C:\wondertech-site\wondertech\ (à côté de manage.py) :
+  catalog\    -> le dossier complet
+  templates\catalog\  -> dans votre dossier templates existant
+
+4 petites modifications dans VOS fichiers existants :
+
+1) settings.py
+   - INSTALLED_APPS : ajouter  "catalog",
+   - TEMPLATES -> OPTIONS -> context_processors : ajouter
+         "catalog.context_processors.nav_menu",
+   - en bas du fichier :
+         MEDIA_URL = "/media/"
+         MEDIA_ROOT = BASE_DIR / "media"
+
+2) urls.py du projet : ajouter
+         from django.conf import settings
+         from django.conf.urls.static import static
+         path("", include("catalog.urls")),      # dans urlpatterns (import include si besoin)
+     et, tout à la fin du fichier :
+         if settings.DEBUG:
+             urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+3) base.html : remplacer les menus codés en dur par ceux de
+   templates\catalog\_nav_menus_example.html
+   (les gabarits attendent un bloc  {% block content %}  dans base.html)
+
+4) Terminal :
+         pip install Pillow
+         python manage.py makemigrations catalog
+         python manage.py migrate
+         python manage.py createsuperuser
+         python manage.py runserver
+   Puis ouvrir http://127.0.0.1:8000/admin/ pour créer catégories, produits, services.

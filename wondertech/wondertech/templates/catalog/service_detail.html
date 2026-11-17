@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container">
+  <h1>{{ service.title }}</h1>
+  {% if service.summary %}<p class="lead">{{ service.summary }}</p>{% endif %}
+  {{ service.description|linebreaks }}
+  <a class="btn" href="/#contact">Demander un devis gratuit</a>
+</section>
+{% endblock %}

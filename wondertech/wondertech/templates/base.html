@@ -1,0 +1,52 @@
+{% load static wagtailuserbar %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Wonder Tech – Services informatiques et vente de matériel{% endblock %}</title>
+  <meta name="description" content="{% block description %}Infrastructure, sécurité et support technique sur mesure à Sfax.{% endblock %}">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="{% static 'css/wondertech.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+{% wagtailuserbar %}
+<header id="header">
+  <div class="wrap">
+    <div class="top">
+      <a class="logo" href="/"><img src="{% static 'img/logo.png' %}" alt="Wonder Tech" height="64"></a>
+      <div class="search"><input type="search" placeholder="Rechercher produits et services…" aria-label="Rechercher"></div>
+      <a class="btn small" href="/contact/">Devis gratuit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <nav id="nav">
+      <a href="/">Accueil</a>
+      <a href="/a-propos/">À propos</a>
+      <div class="dd"><button aria-expanded="false">Services <i>▾</i></button>
+        <div class="panel grid">
+          <a href="/services/"><b>Systèmes et réseaux</b><span>Architecture IT et administration.</span></a>
+          <a href="/services/"><b>Cybersécurité et données</b><span>Protégez vos actifs.</span></a>
+          <a href="/services/"><b>Infogérance</b><span>Nous gérons votre parc.</span></a>
+          <a href="/services/"><b>Stockage et sauvegarde</b><span>Vos fichiers en sécurité.</span></a>
+          <a href="/services/"><b>Cloud et virtualisation</b><span>Migration et serveurs virtuels.</span></a>
+          <a href="/services/"><b>Identification et traçabilité</b><span>Impression durable et précise.</span></a>
+        </div>
+      </div>
+      <a href="/produits/">Produits</a>
+      <a href="/actualites/">Actualités</a>
+      <a href="/contact/">Contact</a>
+      <div class="contact-mini"><span>📍 Sfax Route Mahdia km 2</span><a href="tel:+21622976177">+216 22 976 177</a></div>
+    </nav>
+  </div>
+</header>
+
+<main>{% block content %}{% endblock %}</main>
+
+<footer><div class="wrap">© 2026 Wonder Tech – Route Mahdia km 2, Sfax 3000 – contact@wondertech.tn</div></footer>
+
+<a class="call-fab" href="tel:+21622976177" aria-label="Appeler Wonder Tech">📞</a>
+<button class="to-top" id="toTop" aria-label="Retour en haut">↑</button>
+<script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

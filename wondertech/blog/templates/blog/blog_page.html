@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} – Wonder Tech{% endblock %}
+{% block description %}{{ page.intro }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="wrap article">
+    <a href="{{ page.get_parent.url }}">← Retour aux actualités</a>
+    <h1>{{ page.title }}</h1>
+    <small>{{ page.date|date:"d/m/Y" }}</small>
+    {% if page.image %}{% image page.image width-1000 class="article-img" %}{% endif %}
+    <div class="richtext">{{ page.body|richtext }}</div>
+  </div>
+</section>
+{% endblock %}

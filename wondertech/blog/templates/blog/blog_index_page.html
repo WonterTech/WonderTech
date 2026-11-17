@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }} – Wonder Tech{% endblock %}
+
+{% block content %}
+<section>
+  <div class="wrap">
+    <h1>{{ page.title }}</h1>
+    <div class="lead richtext">{{ page.intro|richtext }}</div>
+    <div class="cards">
+      {% for post in posts %}
+        <a class="card post" href="{% pageurl post %}">
+          {% if post.image %}{% image post.image fill-600x340 class="post-img" %}{% endif %}
+          <small>{{ post.date|date:"d/m/Y" }}</small>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.intro }}</p>
+        </a>
+      {% empty %}
+        <p>Aucun article pour le moment.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
